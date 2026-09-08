@@ -699,6 +699,13 @@
     # -E (Habilita el uso de Expresiones Regulares Extendidas)
     # -n (Desplegar el número de línea exacto de los aciertos en el archivo)
 
+- tool: awk
+  category: utility
+  tags: [search, filter, text]
+  description: "Herramienta integrada en el sistema para múltiples funcionalidades, principalmente filtrado de palabras y expresiones"
+  command: |
+    cat archivo.txt | awk '{for(i=1; i<=NF; i++) if(length($i) > 5) print $i}     # Ayuda a filtrar por longitud de caracteres
+
 - tool: pspy
   category: info
   tags: [monitoring, processes, cronjobs]
