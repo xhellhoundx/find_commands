@@ -693,11 +693,13 @@
   tags: [search, filter, text, regex]
   description: "Herramienta integrada del sistema de filtrado y búsqueda de patrones de texto basada en expresiones regulares."
   command: |
-    # Parámetros recurrentes de filtrado:
-    # -v (Invertir la selección; omite los aciertos encontrados)
-    # -i (Ignorar explícitamente diferencias entre mayúsculas y minúsculas)
-    # -E (Habilita el uso de Expresiones Regulares Extendidas)
-    # -n (Desplegar el número de línea exacto de los aciertos en el archivo)
+    -v    # Invertir la selección; omite los aciertos encontrados)
+    -i    # Ignorar explícitamente diferencias entre mayúsculas y minúsculas)
+    -E    # Habilita el uso de Expresiones Regulares Extendidas)
+    -n    # Desplegar el número de línea exacto de los aciertos en el archivo)
+    -o    # Only Matching
+    -w    # Selecciona sólo esas líneas que contienen la palabra completa
+    -P    # Perl Regex
 
 - tool: awk
   category: utility
