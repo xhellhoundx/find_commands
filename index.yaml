@@ -518,10 +518,11 @@
   description: "Fuzzer web rápido escrito en Go diseñado para el descubrimiento de elementos mediante sustitución de palabras clave."
   command: |
     ffuf -w /ruta/wordlist.txt -u http://target/FUZZ
-    # Flags de filtrado útiles:
+    ffuf -w /rota/wordlist.txt -u http://target?FUZZ=comando
     # -H "Header: Valor" (Inyectar o modificar cabeceras personalizadas)
     # -fs [size]        (Filtrar y ocultar respuestas por longitud exacta de bytes)
     # -fc [code]        (Filtrar y ocultar respuestas por códigos de estado HTTP)
+    # -mc [status]      (Filtrar por status code)
 
 - tool: hexeditor
   category: forensic
