@@ -561,10 +561,14 @@
   command: |
     ffuf -w /ruta/wordlist.txt -u http://target/FUZZ
     ffuf -w /rota/wordlist.txt -u http://target?FUZZ=comando
-    # -H "Header: Valor" (Inyectar o modificar cabeceras personalizadas)
-    # -fs [size]        (Filtrar y ocultar respuestas por longitud exacta de bytes)
-    # -fc [code]        (Filtrar y ocultar respuestas por códigos de estado HTTP)
-    # -mc [status]      (Filtrar por status code)
+    -u                    URL
+    -H "Header: Valor"    Inyectar o modificar cabeceras personalizadas
+    -fs [size]            Filtrar y ocultar respuestas por longitud exacta de bytes
+    -fc [code]            Filtrar y ocultar respuestas por códigos de estado HTTP
+    -mc [status]          Filtrar por status code
+    -w -                  Wordlist | si se usa el guión tomará el pipe del comando anterior
+    -d                    Datos de solicitud POST (form)
+    -r                    Sigue redirecciones
 
 - tool: hexeditor
   category: forensic
