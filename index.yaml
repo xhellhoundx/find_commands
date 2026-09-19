@@ -268,6 +268,48 @@
   command: |
     curl <FLAGS> URL
 
+- tool: sed
+  category: utility
+  tags: [stream, filter, pipe]
+  descripcion: "Editor de flujos para filtrar y transformar texto"
+  command: |
+    -n                # Silencia la impresión automática
+    -i[SUFIJO]        # Edita el archivo en el momento. Con el sufijo "-i.bak" crea una copia de respaldo.
+    -e 'script'       # Añade un comando; permite encadenar varios
+    -f <archivo>      # Lee los comandos desde un archivo de script
+    -E, -r            # Usa expresiones regulares extendidas: ', ?, |, () sin escapar
+    -s                # Trata cada archivo como independiente (los números de línea se reinician)
+    -z                # Usa el caracter nulo como separador de línea en vez de saltos de línea)
+    --debug           # Muestra cómo interpreta el script.
+    Ejemplo:  direccion/patron/reemplazo/bandera
+    ---- direcciones ----
+    3                 # Solo la línea 3
+    1,3               # De la línea 2 a la 5
+    $                 # Última línea
+    1~2               # Cada dos líneas empezando por la 1
+    /patron/          # Líneas que coinciden con patron
+    /ini/,/fin/       # Desde la linea que coincide con "ini" hasta la que coincide con "fin"
+    2,+3              # La línea 2 y las 3 siguientes
+    direccion!        # Invierte la selección (todas menos esas)
+    ---- comandos principales ----
+    s                 # Sustituir
+    d                 # Borrar línea
+    p                 # Imprimir línea
+    a\                # Añadir texto después de la línea
+    i\                # Insertar texto antes de la línea
+    c\                # Cambiar reemplazar la línea completa
+    y                 # Transliterar caracteres (como tr)
+    r <archivo>       # Insertar contenido de un archivo
+    w <archivo>       # Escribir las líneas seleccionadas en un archivo
+    q                 # Salir
+    =                 # Imprimir el número de línea
+    ---- banderas ----
+    g                 # todas las coincidencias de la línea (sin ella sólo la primera)
+    2                 # Sólo la segunda coincidencia. 2g desde la segunda en adelante
+    i, I              # Ignora mayúsculas o minúsculas
+    p                 # Imprime la línea si hubo sustitución (útil con -n)
+    w <archivo>       # Escribe las líneas modificadas en un archivo
+    
 - tool: capabilities
   category: system
   tags: [root, least-privilege]
@@ -701,6 +743,8 @@
     -o    # Only Matching
     -w    # Selecciona sólo esas líneas que contienen la palabra completa
     -P    # Perl Regex
+    # Grepear IP
+    grep <file> -oP '\d{1.3}(\.[\d]{1,3}){3}'
 
 - tool: awk
   category: utility
