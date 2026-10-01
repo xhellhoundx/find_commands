@@ -862,6 +862,7 @@
     redis-cli -h <HOST> -p <PORT> -a <PASSWORD>
     # Comandos analíticos recurrentes una vez conectados internamente:
     INFO                            # Inspeccionar estadísticas globales del motor y el sistema operativo
+    INFO keyspace                   # Inspecciona todas las estadísticas, ayuda a ver cuál está disponible
     SELECT [0-16]                   # Conmutar entre los entornos lógicos indexados de bases de datos
     KEYS *                          # Listar de forma explícita todas las claves residentes en el espacio activo
     TYPE [key]                      # Validar la tipología del valor de la clave analizada
