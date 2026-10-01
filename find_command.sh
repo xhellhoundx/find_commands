@@ -69,7 +69,7 @@ function find_by_label() {
   fi
 
   if (( $(echo "$FIND_CAT" | wc -l) > "$TTY_SIZE" )); then
-    echo "$FIND_CAT" | less; exit
+    echo "$FIND_CAT" | sort | less
   fi
 
   echo "$FIND_CAT"
