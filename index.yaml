@@ -808,6 +808,13 @@
     smbclient //server/path -p <PORT> -N      # Conectarse directamente al recurso compartido sin contraseña
     # Operadores disponibles dentro del prompt: ls, cd, get, help
 
+- tool: netexec
+  category: network
+  tags: [exploitation, wmi, winrm, vnc, ssh, rdp, nfs, ldap, ftp, smb, mssql]
+  description: "Servicio de explotación de redes que ayuda a automatizar la evaluación de la seguridad de redes grandes"
+  command: |
+    netexec <PROTOCOLO> <IP>
+
 - tool: rsync
   category: network
   tags: [file-transfer, sync, delta-encoding]
