@@ -310,6 +310,27 @@
     p                 # Imprime la línea si hubo sustitución (útil con -n)
     w <archivo>       # Escribe las líneas modificadas en un archivo
     
+- tool: useradd
+  category: utility
+  tags: [user, password]
+  description: "Crea o actualiza un nuevo usuario"
+  command: |
+
+    sudo useradd <usuario>
+
+    flags
+    -m                # Crea un directorio personalizado en /home
+    -s                # Le asigna una shell, se debe pasar un valor a este parámetro (/bin/bash por ejemplo)
+    -d                # Especifica una ruta custom para el home, en vez de default (/opt/usuario por ejemplo)
+    -g                # Asigna el grupo primario del usuario (-g sudo)
+    -G                # Asigna grupos secundarios adicionales separados por coma (-G sudo, adm, docker)
+    -u                # Fuerza un UID específico en vez de que el sistema asigne automáticamente
+    -c                # Comentario, descripción del usuario.
+    -e                # Fecha de expiración de la cuenta, formato YYYY-MM-DD
+    -r                # Crea un usuario de sistema: UID bajo, sin expiración de contraseña, pensado para servicios.
+    -p                # Asigna contraseña ya hasheada directamente
+    -N                # No crea un grupo con el mismo nombre del usuario (comportamiento típico de Debian)
+
 - tool: capabilities
   category: system
   tags: [root, least-privilege]
@@ -408,6 +429,15 @@
       -i                            # Archivo/ruta con llave de autenticación
       -o                            # Fuerza el modo de autenticación "-o PreferredAuthentications=password"
       -L                            # Local Port Forwarding. Abre un puerto en tu máquina local que tunela el tŕafico de forma cifrada hacia un puerto del servidor remoto. "-L 8000:localhost:3000 usuario@ip_server"
+
+    Port Forwarding:
+
+    ssh -L <puerto-local>:<destino/IP>:<puerto-remoto> usuario@ip_server
+    
+    En el caso de llave privada:
+
+    ssh -i <llave> -L <puerto-local>:<destino/IP>:<puerto-remoto> usuario@ip_server
+
   command: | 
     ssh <FLAGS> usuario@ip_server
 
