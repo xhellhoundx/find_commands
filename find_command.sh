@@ -69,7 +69,7 @@ function find_by_label() {
   fi
 
   if (( $(echo "$FIND_CAT" | wc -l) > "$TTY_SIZE" )); then
-    echo "$FIND_CAT" | sort | less; exit
+    echo "$FIND_CAT" | /usr/bin/sort | /usr/bin/less; exit
   fi
 
   echo "$FIND_CAT"
@@ -105,7 +105,7 @@ while getopts ":k:c:a:lh" opt; do
     a)
       find_by_label "$OPTARG";;
 		l)
-      echo "$LIST_TOOLS" | less; exit;;
+      echo "$LIST_TOOLS" | /usr/bin/sort | /usr/bin/less; exit;;
     h)
       usage; exit;;
 		?) usage; exit;;
