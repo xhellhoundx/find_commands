@@ -864,8 +864,9 @@
     INFO                            # Inspeccionar estadísticas globales del motor y el sistema operativo
     SELECT [0-16]                   # Conmutar entre los entornos lógicos indexados de bases de datos
     KEYS *                          # Listar de forma explícita todas las claves residentes en el espacio activo
-    GET [key]                       # Extraer de forma directa el valor almacenado en una clave concreta
     TYPE [key]                      # Validar la tipología del valor de la clave analizada
+    GET [key]                       # Extraer de forma directa el valor almacenado en una "key" string
+    LRANGE [key]                    # Listar listas
 
 - tool: extra
   category: extra
