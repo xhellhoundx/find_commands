@@ -266,6 +266,7 @@
       -v, --verbose                 # Modo verbose.
       -w, --write-out <FORMAT>      # Hace que curl muestre la información de la respuesta, ver mejor con ayuda. "-w '%{http_code}\n'"
   command: |
+
     curl <FLAGS> URL
 
 - tool: sed
@@ -330,6 +331,44 @@
     -r                # Crea un usuario de sistema: UID bajo, sin expiración de contraseña, pensado para servicios.
     -p                # Asigna contraseña ya hasheada directamente
     -N                # No crea un grupo con el mismo nombre del usuario (comportamiento típico de Debian)
+
+- tool: chpasswd
+  category: utility
+  tags: [user, password]
+  description: "Actualiza contraseñas en lotes"
+  command: |
+
+    echo "usuario:password" | sudo chpasswd   # Lee pares "usuario:contraseña" en texto plano desde stdin y los hashea/asigna
+    -e, --encrypted                           # Indica que la contraseña ya viene hasheada "usuario:$6$..."
+    -c, --crypt-method MET                    # Indicar el tipo de encriptado, 'man chpasswd' para ver los tipos de encriptado
+    -s, --sha-rounds ROUNDS                   # Define el número de rondas del algoritmo SHA
+    -R, --root                                # Aplica los cambios dentro de u directorio raíz alternativo.
+
+- tool: usermod
+  category: utility
+  tags: [user, password, groups]
+  description: "Modifica una cuenta de usuario"
+  command: |
+
+    Cambia o actualiza grupos:
+    sudo usermod <FLAG> <GRUPO/SHELL/DIRECTORIO> <USUARIO>
+
+    -aG             # Son dos flags "-a" y "-G", (append y groups respectivamente) añade el usuario a uno o más grupos secundarios, sin quitar los que ya tenía
+    -G              # Reemplaza todos los grupos secundarios del usuario por los indicados (separados por comas) - ¡Elimina los anteriores!
+    -g              # Cambia el grupo primario del usuario
+    -s              # Cambia la shell de login del usuario
+    -d              # Cambia la ruta del directorio "home" del usuario (no mueve archivos, sólo actualiza la referencia)
+    -m              # Se usa junto con "-d" para mover físicamente el contenido del home antiguo al nuevo destino 
+    sudo usermod -d /home/nuevo -m usuario
+    
+    -l              # Cambia el nombre de login (username) del usuario
+    sudo usermod -l nuevonombre viejonombre
+
+    -u              # Cambia el UID del usuario
+    -L              # Bloquea la cuenta (equivale a poner un '!' delante del hash en '/etc/shadow', impidiendo login con contraseña)
+    -U              # Desbloque al cuenta (inverso de -L)
+    -e              # Cambia la fecha de expiración de la cuenta
+    -c              # Cambia el comentario/descripción
 
 - tool: capabilities
   category: system
