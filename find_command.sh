@@ -10,11 +10,9 @@
 
 # Sección de "yq"
 
-PCKG_EXIST=$(which yq)
-
-if [[ $(echo "$PCKG_EXIST" | echo $?) -gt 0  ]]; then
-  echo -e "\n\tNo tienes el paquete \e[1myq\e[0m instalado por favor ve a \e[3mhttps://github.com/mikefarah/yq/releases\e]0m y descarga el binario correspondiente a tu arquitectura" 
-  exit
+if ! command -v yq &>/dev/null; then
+  echo -e "\n\tNo tienes el paquete \e[1myq\e[0m instalado por favor ve a \e[3mhttps://github.com/mikefarah/yq/releases\e[0m y descarga el binario correspondiente a tu arquitectura" 
+  exit 1
 fi
 
 # Path & Global variables

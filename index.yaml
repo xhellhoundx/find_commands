@@ -175,7 +175,9 @@
   tags: [download, sudo, privesc, etc-password]
   description: |
     Descarga de archivos en la terminal (CLI)
-    Flags útiles:
+  command: |
+    wget FLAGS URL
+    wget --tries=0 --retry-connrefused <URL> # Buen comando para descargas que se puedan pausar. En caso de pausarse se puede usar el mismo comando con el flag "-c" para reanudar.
       -b                            # background, se va a segundo plano después de iniciar
       -q                            # quiet
       -o                            # output-file, registra los mensajes de la descarga en el archivo asignado
@@ -197,6 +199,7 @@
       -X LIST                       # Lo contrario a -I, excluye los que estén mencionados en la lista separados por comas.
       -nd | --no-directories        # No crea una jerarquía de directorios cuando se descarga de forma recursiva
       -np | --no-parent             # No asciende en la jerarquía de directorios. 
+      -nH | --no-host-directories   # No crea directorios del anfitrión
       -x                            # Lo contrario de "-nd"
       --no-cache                    # Deshabilita la caché del servidor. En este caso wget enviará las directivas correspondientes para desactivarlos.
       --no-cookies                  # Desactiva el uso de cookies
@@ -205,10 +208,10 @@
       --compression=type            # Elige el tipo de compresión del archivo a descargar
       --max-redirect=number         # Especifica el número de redirecciones
       --secure-protocol=protocol    # Especifica el tipo de protocolo seguro (TLS/SSL)
-      --retry-connrefused           # Considera "connection refused" un error transitorio e intenta de nuevo. Bueno para acompañar con "--tries=0" hace intentos infinitos de descarga.
-  command: |
-    wget FLAGS URL
-    wget --tries=0 --retry-connrefused <URL> # Buen comando para descargas que se puedan pausar. En caso de pausarse se puede usar el mismo comando con el flag "-c" para reanudar.
+      --retry-connrefused           # Considera "connection refused" un error transitorio e intenta de nuevo. Bueno para acompañar con "--tries=0" hace intentos infinitos de descarga. 
+      --post-file=file              # Usa POST como método para las solicitudes HTTP, envía archivos
+      --post-data=string            # Usa post como método para las solicitudes, envía texto
+      --header=header-line          # Asigna un header a la solicitud HTTP o cualquier otra
 
 - tool: curl
   category: utility
