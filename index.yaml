@@ -154,21 +154,21 @@
   tags: [listener, shell, exploitation]
   description: "Poner un puerto a la escucha para recibir conexiones"
   command: |
+
     nc -nlvp [PUERTO]
+    
+    Enviar un archivo mediante redes
+      nc <IP> <PORT> < file.ext
 
-- tool: nc
-  category: network
-  tags: [listener, shell, exploitation]
-  description: "Recibir un archivo mediante redes"
-  command: |
-    nc -lp <PORT> > file.ext
+      Comprimido:
+      tar czfv - /ruta/del/archivo | nc <IP> <PORT>
 
-- tool: nc
-  category: network
-  tags: [listener, shell, exploitation]
-  description: "Enviar un archivo mediante redes"
-  command: |
-    nc <IP> <PORT> < file.ext
+    Recibir un archivo mediante redes
+      nc -lp <PORT> > file.ext
+
+      Comprimido:
+      nc -lp <PORT> | tar xzvf -
+      (Añadir el flag -C en caso que sea un directorio) 
 
 - tool: wget
   category: utility
@@ -746,26 +746,16 @@
   command: |
     tar -xf archivo.tar
 
-- tool: tar
-  category: utility
-  tags: [compression, extraction, archive]
-  description: "Transferir y recibir comprimidos mediante nc u otros"
-  command: |
-    Transferir
-    tar -czvf - /ruta/al/directorio | nc <IP> <PORT>
-      -c: Crea un nuevo archivo.
-      -z: Archiva a través de gzip
-      -v: Verbose, lista los archivos procesados
-      -f: File|Archivo
-      - -: El guión indica a tar que use el in/out predeterminado en lugar de crear un archivo en el disco duro.
-    Recibir
-    nc -lp 3000 | tar -xzvf -
-      -x: Extract
-      -z: Extraer gzip
-      -v: Verbose
-      -f: File|Archivo
-      - -: Le indica a tar que use el in/out predeterminado
-
+    -c: Crea un nuevo archivo.
+    -z: Archiva a través de gzip
+    -v: Verbose, lista los archivos procesados
+    -f: File|Archivo
+    - -: El guión indica a tar que use el in/out predeterminado en lugar de crear un archivo en el disco duro.
+    -x: Extract
+    -z: Extraer gzip
+    -v: Verbose
+    -f: File|Archivo
+     
 - tool: unzip
   category: utility
   tags: [compression, extraction, zip]
