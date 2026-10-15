@@ -237,6 +237,7 @@
       --doh-url URL                 # Especifica que servidor DNS-over-HTTPS para resolver hostsnames
       -D FILE, --dump-header FILE   # Vuelca los headers de una solicitud en el archivo especificado.
       -F, --form                    # Permite a curl enviar datos al servidor de un formulario especificamente usando el formato "multipart/form-data". Se utiliza para subir archivos y enviar formularios que mezclan campos de textos con archivos. Este flag cambia automáticamente el método a POST. Se debe indicar con un "@" cuando se desea subir un archivo: -F "file=@/path/file.ext" [URL]. Para enviar campos de texto se usa el parámetro normal: -F "clave=valor", puede ser usado múltiples veces en un comando.
+      --data-binary <data>          # Manda datos crudos en la solicitud: @filename
       -G, --get                     # Cuando es usada esta opción hace que toda la data especificada con "-d, --data" sea usada en una petición GET.
       -I, --head                    # Sólo imprime los headers de la solicitud.
       -H HEADER/FILE, --header HEADER/file # Añade un header extra a la solicitud, se hace "HEADER: Valor" tal cuál como si fuese la solicitud.
@@ -314,6 +315,17 @@
     p                 # Imprime la línea si hubo sustitución (útil con -n)
     w <archivo>       # Escribe las líneas modificadas en un archivo
     
+- tool: comm
+  category: utility
+  tags: [filter, compare]
+  description: "Compara línea por línea dos archivos ordenados"
+  command: |
+    
+    comm <(sort ARCHIVO 1) <(sort ARCHIVO 2)
+    -1          # Elimina la columna 1 (filas que solo están presentes en ARCHIVO 1)
+    -2          # Elimina la columna 2 (filas que solo están presentes en ARCHIVO 2)
+    -3          # Elimina la columna 3 (líneas que están en ambos archivos)
+
 - tool: useradd
   category: utility
   tags: [user, password]
@@ -797,6 +809,13 @@
     openssl rsa -in key_rsa -text -noout        # Analizar matemáticamente los valores internos de una clave privada RSA
     openssl s_client -connect <IP>:<PORT> -cert <cert>.crt -key <key>.key # Entablar conexiones TLS usando autenticación mutua (mTLS)
 
+    openssl también se compone de otros comandos dependiendo de los certificados:
+    
+    openssl-x509: Se puede ver el manual
+
+    openssl x509 -in certificado.pem -text -out certificado.txt     # Convierte el certificado en un string
+
+
 - tool: grep
   category: utility
   tags: [search, filter, text, regex]
@@ -860,6 +879,8 @@
     borg list /path/a/listar          # Listar el contenido del repositorio de backups
     borg info /path/para/información  # Obtener metadatos descriptivos del archivo comprimido
     borg extract /path/::archivo      # Extraer elementos definidos del backup
+    
+    Para extraer un archivo se debe crear un directorio aparte y en ese directorio extraer el backup
 
 - tool: smbclient
   category: network
