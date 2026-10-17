@@ -838,6 +838,20 @@
   command: |
     cat archivo.txt | awk '{for(i=1; i<=NF; i++) if(length($i) > 5) print $i}     # Ayuda a filtrar por longitud de caracteres
 
+- tool: docker
+  category: utility
+  tags: [container, so]
+  description: "Empaquetar aplicaciones y sus dependencias en unidades estandarizadas llamadas contenedores"
+  command: |
+    docker run -v /:/mnt --rm -it alpine chroot /mnt bash     # Monta una imágen
+    # El comando anterior ejecuta:
+    # docker run        ->  Inicia un contenedor
+    # -v /:/mnt         ->  Monta la raíz del disco local en la carpeta /mnt del contenedor
+    # --rm              ->  Elimina el contenedor automáticamente al salir
+    # -it               ->  Mantiene la sesión interactiva en la terminal
+    # apline            ->  La imágen de Linux que se usa como base (puede variar)
+    # chroot /mnt bash  ->  Cambia la raíz del sistema del contenedor hacia /mnt (nuestro host) y ejecuta una bash.
+
 - tool: pspy
   category: info
   tags: [monitoring, processes, cronjobs]
